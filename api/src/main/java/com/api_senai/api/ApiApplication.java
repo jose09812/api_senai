@@ -3,8 +3,6 @@ package com.api_senai.api;
 import com.api_senai.api.entities.Cliente;
 import com.api_senai.api.entities.Endereco;
 
-import ch.qos.logback.core.net.server.Client;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Scanner;
@@ -43,6 +41,8 @@ public class ApiApplication {
 		cliente.setEndereco(endereco);
 
 		System.out.println(cliente);
+
+		sc.close();
 
 	}
 
