@@ -2,6 +2,8 @@ package com.api_senai.api.entities;
 
 import lombok.Data;
 
+import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -15,9 +17,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Data
 @Entity
+@Table(name = "enderecos")
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +34,9 @@ public class Endereco {
     private String bairro;
     private String localidade; //cidade
     private String uf;
+    
+    @OneToMany(mappedBy = "endereco")
+    private List<Cliente> clientes;
 
     public static Endereco getEnderecoByCep(String cep){
         Endereco endereco = new Endereco();
