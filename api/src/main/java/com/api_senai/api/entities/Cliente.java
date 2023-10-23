@@ -19,7 +19,6 @@ import lombok.EqualsAndHashCode;
        uniqueConstraints = {
            @UniqueConstraint(name = "email_ukey", columnNames = "email"),
            @UniqueConstraint(name = "cpf_ukey", columnNames = "cpf"),
-           @UniqueConstraint(name = "endereco_ukey", columnNames = "endereco"),
            @UniqueConstraint(name = "telefone_ukey", columnNames = "telefone")
        })
 public class Cliente extends Pessoa{
@@ -29,6 +28,7 @@ public class Cliente extends Pessoa{
     private Long id;
     private String login;
     private String senha;
+    private boolean ativo;
 
     @ManyToOne
     @JoinColumn(name = "endereco", foreignKey = @ForeignKey(name = "endereco_fkey"))
