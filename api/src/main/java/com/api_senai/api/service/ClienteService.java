@@ -30,5 +30,18 @@ public class ClienteService {
         Cliente cliente = clienteRepository.save(novoCliente);
         return cliente;
     }
+    public Cliente updateCliente(Long id, Cliente clienteAtualizado){
+        
+        Cliente cliente = saveCliente(clienteAtualizado);
+        
+        return cliente;
+    }
+    public Cliente deleteCliente(Long id){
 
+        Cliente cliente = getClienteById(id);
+        clienteRepository.deleteById(id);
+        Cliente clienteDeletado = getClienteById(id);
+
+        return clienteDeletado;
+    }
 }

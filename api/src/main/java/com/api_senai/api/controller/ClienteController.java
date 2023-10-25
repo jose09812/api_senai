@@ -3,7 +3,9 @@ package com.api_senai.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +36,13 @@ public class ClienteController {
         
         Cliente cliente = clienteService.getClienteById(id);
 
-        return ResponseEntity.ok(cliente);
+        if (cliente != null){
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(cliente, HttpStatus.NOT_FOUND);
+        }
+
     }
     @PostMapping
     public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente novoCliente){
@@ -42,28 +50,18 @@ public class ClienteController {
         Cliente cliente = clienteService.saveCliente(novoCliente);
         return ResponseEntity.ok(cliente);
     }
-    @PutMapping
-    @RequestMapping("/{id}")
-    public ResponseEntity<Cliente> updateCliente (@RequestBody Cliente cliente) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> updateCliente (@RequestBody Cliente clienteAtualizado, @PathVariable Long id) {
 
-        Cliente cliente = clienteService.updateCliente();
+        Cliente cliente = clienteService.updateCliente(id, clienteAtualizado);
+        return ResponseEntity.ok(cliente);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cliente> deleteCliente(@PathVariable Long id){
+
+        Cliente cliente = clienteService.deleteCliente(id);
+        
         return ResponseEntity.ok(cliente);
     }
 
-    // @GetMapping("/{id}")
-    // getClienteById(){
-
-    // }
-    // @PostMapping
-    // saveCliente(Cliente cliente){
-
-    // }
-    // @PutMapping("/{id}")
-    // updateCliente(@RequestBody Cliente clienteUpdated){
-
-    // }
-    // @DeleteMapping("/{id}")
-    // deleteCliente(Long id){
-
-    // }
 }
