@@ -19,5 +19,16 @@ public class ClienteService {
 
         return clientes;
     }
+    public Cliente getClienteById(Long id){
+
+        Cliente cliente = clienteRepository.findById(id).orElse(null);
+
+        return cliente;
+    }
+    public Cliente saveCliente(Cliente novoCliente){
+
+        Cliente cliente = clienteRepository.save(novoCliente);
+        return cliente;
+    }
 
 }
