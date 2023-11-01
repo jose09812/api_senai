@@ -35,11 +35,11 @@ public class Endereco {
     private String localidade; //cidade
     private String uf;
     
-    @OneToMany(mappedBy = "endereco")
-    private List<Cliente> clientes;
+    @OneToOne(mappedBy = "endereco")
+    private Cliente clientes;
 
     @OneToOne(mappedBy = "endereco")
-    private Cliente funcionario;
+    private Funcionario funcionario;
 
     public static Endereco getEnderecoByCep(String cep){
         Endereco endereco = new Endereco();

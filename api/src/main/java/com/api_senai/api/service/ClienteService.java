@@ -38,7 +38,6 @@ public class ClienteService {
     }
     public Cliente deleteCliente(Long id){
 
-        Cliente cliente = getClienteById(id);
         clienteRepository.deleteById(id);
         Cliente clienteDeletado = getClienteById(id);
 
