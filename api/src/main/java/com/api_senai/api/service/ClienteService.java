@@ -32,9 +32,11 @@ public class ClienteService {
     }
     public Cliente updateCliente(Long id, Cliente clienteAtualizado){
         
-        Cliente cliente = saveCliente(clienteAtualizado);
+        Cliente clienteExistente = getClienteById(id);
+        clienteExistente.setAllAtributos(clienteAtualizado);
+        saveCliente(clienteExistente);
         
-        return cliente;
+        return clienteExistente;
     }
     public Cliente deleteCliente(Long id){
 
@@ -42,5 +44,12 @@ public class ClienteService {
         Cliente clienteDeletado = getClienteById(id);
 
         return clienteDeletado;
+    }
+    public Cliente logicalDeleteCliente(Long id){
+        Cliente clienteExistente = getClienteById(id);
+        clienteExistente.setAtivo(false);
+        saveCliente(clienteExistente);
+
+        return clienteExistente;
     }
 }

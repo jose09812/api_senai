@@ -29,7 +29,11 @@ public class ClienteController {
         
         List<Cliente> clientes = clienteService.getAllClientes();
 
-        return ResponseEntity.ok(clientes);
+        if(!clientes.isEmpty()) {
+            return new ResponseEntity<>(clientes, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(clientes, HttpStatus.NOT_FOUND);
+        }
     }
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> getClientesById(@PathVariable Long id){
@@ -38,11 +42,9 @@ public class ClienteController {
 
         if (cliente != null){
             return new ResponseEntity<>(cliente, HttpStatus.OK);
-        }
-        else{
+        } else {
             return new ResponseEntity<>(cliente, HttpStatus.NOT_FOUND);
         }
-
     }
     @PostMapping
     public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente novoCliente){
@@ -53,15 +55,36 @@ public class ClienteController {
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> updateCliente (@RequestBody Cliente clienteAtualizado, @PathVariable Long id) {
 
-        Cliente cliente = clienteService.updateCliente(id, clienteAtualizado);
-        return ResponseEntity.ok(cliente);
+        Cliente cliente = clienteService.getClienteById(id);
+        if (cliente != null){
+            Cliente clienteNovo = clienteService.updateCliente(id, clienteAtualizado);
+            return new ResponseEntity<>(clienteNovo, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(cliente, HttpStatus.NOT_FOUND);
+        }
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Cliente> deleteCliente(@PathVariable Long id){
 
-        Cliente cliente = clienteService.deleteCliente(id);
+        Cliente cliente = clienteService.getClienteById(id);
         
-        return ResponseEntity.ok(cliente);
+        if (cliente != null){
+            clienteService.deleteCliente(id);
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(cliente, HttpStatus.NOT_FOUND);
+        }
     }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Cliente> logicalDeleteCliente(@PathVariable Long id){
 
+        Cliente cliente = clienteService.getClienteById(id);
+        
+        if (cliente != null){
+            clienteService.logicalDeleteCliente(id);
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(cliente, HttpStatus.NOT_FOUND);
+        }
+    }
 }
