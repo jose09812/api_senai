@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
@@ -27,6 +28,9 @@ public class Cliente extends Pessoa{
     private String login;
     private String senha;
     private boolean ativo;
+
+    @OneToOne(mappedBy = "cliente")
+    private Conta conta;
 
     // public Cliente(){
     //     this.setAtivo(true);
