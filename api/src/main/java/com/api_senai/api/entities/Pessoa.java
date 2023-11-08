@@ -11,7 +11,6 @@ import lombok.Data;
 @Data
 @MappedSuperclass
 public abstract class Pessoa {
-
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
