@@ -29,4 +29,12 @@ public class Operacao {
     @ManyToOne
     @JoinColumn
     private Conta destino;
+
+    public void setAllAtributos (Operacao novaOperacao) {
+        this.setData(novaOperacao.getData());
+        this.setDestino(novaOperacao.getDestino());
+        this.setOrigem(novaOperacao.getOrigem());
+        this.setTipo(novaOperacao.getTipo());
+        this.setValor(novaOperacao.getValor());
+    }
 }

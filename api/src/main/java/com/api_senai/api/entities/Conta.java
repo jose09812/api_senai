@@ -33,4 +33,11 @@ public class Conta {
 
     @OneToMany(mappedBy="destino")
     private List<Operacao> operacoesDestino;
+
+    public void setAllAtributos (Conta novaConta) {
+        this.setNumero(novaConta.getNumero());
+        this.setOperacoesDestino(novaConta.getOperacoesDestino());
+        this.setOperacoesOrigem(novaConta.getOperacoesOrigem());
+        this.setSaldo(novaConta.getSaldo());
+    }
 }

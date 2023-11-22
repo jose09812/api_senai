@@ -1,6 +1,5 @@
 package com.api_senai.api.entities;
 
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;

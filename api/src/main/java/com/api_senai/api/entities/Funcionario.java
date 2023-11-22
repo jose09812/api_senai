@@ -27,4 +27,12 @@ public class Funcionario extends Pessoa{
     private String login;
     private String senha;
     private boolean ativo;
+
+    public void setAllAtributos (Funcionario novoFuncionario) {
+        this.setNome(novoFuncionario.getNome());
+        this.setCpf(novoFuncionario.getCpf());
+        this.setDataNascimento(novoFuncionario.getDataNascimento());
+        this.setTelefone(novoFuncionario.getTelefone());
+        this.setEmail(novoFuncionario.getEmail());
+    }
 }
